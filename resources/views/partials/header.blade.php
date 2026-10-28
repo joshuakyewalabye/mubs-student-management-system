@@ -9,9 +9,9 @@
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </label>
                 <a href="{{ route('dashboard') }}" class="flex items-center ms-2 md:me-8">
-                    <img src="{{ asset('assets/img/logo.svg') }}" alt="MUBS Student Management" class="h-10 w-10 me-3">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="MUBS Student Management" class="h-10 w-10 me-3">
                     <div class="flex flex-col">
-                        <span class="font-semibold text-slate-900 text-base">MUBS Student Management</span>
+                        <span class="font-semibold text-slate-900 text-base">MUBS Student Management System</span>
                         <span class="text-xs text-slate-500">Makerere University Business School</span>
                     </div>
                 </a>
