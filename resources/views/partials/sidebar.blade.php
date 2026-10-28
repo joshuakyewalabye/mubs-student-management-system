@@ -1,3 +1,5 @@
+
+
 <aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 -translate-x-full peer-checked:translate-x-0 sm:translate-x-0 bg-white border-r border-slate-200 flex flex-col">
     <div class="flex-1 px-3 py-4 overflow-y-auto sidebar-scrollbar">
 
