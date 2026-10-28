@@ -6,7 +6,7 @@
 
     {{-- Page heading --}}
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-slate-900">Welcome to the Student Management System</h1>
+        <h1 class="text-2xl font-bold text-slate-900">Welcome to the MUBS Students Management System !</h1>
         <p class="text-slate-500 mt-1">Manage students, courses, lecturers and course registrations in one place.</p>
     </div>
 
@@ -40,7 +40,7 @@
 
     {{-- Recent course registrations --}}
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-        <h2 class="text-lg font-semibold">Recent course registrations</h2>
+        <h2 class="text-lg font-semibold">Recent course Registrations</h2>
         <a href="#" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
             <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New registration
         </a>
