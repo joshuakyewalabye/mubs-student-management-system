@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        return view('courses.index');
     }
 
     /**
@@ -19,7 +18,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('courses.create');
     }
 
     /**
@@ -27,15 +26,8 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+// Real saving comes later, when the Course model exists.
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -43,7 +35,7 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('courses.edit');
     }
 
     /**
@@ -51,7 +43,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -59,6 +51,6 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return redirect()->route('courses.index');
     }
 }

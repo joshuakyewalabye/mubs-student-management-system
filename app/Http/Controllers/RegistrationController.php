@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        //
+        return view('registrations.index');
     }
 
     /**
@@ -19,7 +18,7 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        //
+        return view('registrations.create');
     }
 
     /**
@@ -27,31 +26,8 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        // Real saving and the duplicate check come later.
+        return redirect()->route('registrations.index');
     }
 
     /**
@@ -59,6 +35,6 @@ class RegistrationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return redirect()->route('registrations.index');
     }
 }
