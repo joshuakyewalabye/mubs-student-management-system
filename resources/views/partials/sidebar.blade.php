@@ -7,12 +7,12 @@
             <p class="px-3 text-xs font-semibold text-slate-400 uppercase mb-2">Main</p>
 
             {{-- Active item: blue border + blue background --}}
-            <a href="/dashboard" class="sidebar-item active border-l-3 border-[#2563eb] bg-blue-50 text-[#2563eb] flex items-center p-2 rounded-lg hover:bg-slate-50 hover:text-slate-900 group text-sm transition-all duration-200 pl-3">
+            <a href="{{route('dashboard')}}" class="sidebar-item active border-l-3 border-[#2563eb] bg-blue-50 text-[#2563eb] flex items-center p-2 rounded-lg hover:bg-slate-50 hover:text-slate-900 group text-sm transition-all duration-200 pl-3">
                 <i data-lucide="layout-dashboard" class="w-5 h-5 text-[#2563eb] transition-colors"></i>
                 <span class="ms-3 text-sm font-medium">Dashboard</span>
             </a>
 
-            <a href="#" class="sidebar-item border-l-3 border-transparent text-slate-500 flex items-center p-2 rounded-lg hover:bg-slate-50 hover:text-slate-900 group text-sm transition-all duration-200 pl-3">
+            <a href="{{route('students.index')}}" class="sidebar-item border-l-3 border-transparent text-slate-500 flex items-center p-2 rounded-lg hover:bg-slate-50 hover:text-slate-900 group text-sm transition-all duration-200 pl-3">
                 <i data-lucide="users" class="w-5 h-5 text-slate-400 group-hover:text-[#2563eb] transition-colors"></i>
                 <span class="ms-3 text-sm font-medium">Students</span>
             </a>
