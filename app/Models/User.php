@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -29,4 +32,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // A lecturer has many courses (Q1b hasMany)
+public function courses(): HasMany
+{
+    return $this->hasMany(Course::class, 'lecturer_id');
+}
+
+// A student account has one student record
+public function student(): HasOne
+{
+    return $this->hasOne(Student::class);
+}
 }
