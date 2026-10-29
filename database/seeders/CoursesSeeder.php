@@ -12,12 +12,12 @@ class CoursesSeeder extends Seeder
     {
         $courses = [
             // code, title, credits, lecturer email
-            ['BUC3131', 'Advanced Web Application Development', 4, 'grace.nakato@mubs.ac.ug'],
-            ['BUC3122', 'Database Administration',              3, 'grace.nakato@mubs.ac.ug'],
-            ['BUC3113', 'Systems Analysis and Design',          3, 'peter.okello@mubs.ac.ug'],
-            ['BUC3124', 'Information Systems Security',         3, 'peter.okello@mubs.ac.ug'],
-            ['BUC3105', 'Mobile Application Development',       4, 'grace.nakato@mubs.ac.ug'],
-            ['BUC3116', 'Research Methods',                     3, 'peter.okello@mubs.ac.ug'],
+            ['BUC3131', 'Advanced Web Application Development', 4, 'bashir.mutebi@mubs.ac.ug'],
+            ['BUC3122', 'Database Administration',              5, 'bashir.mutebi@mubs.ac.ug'],
+            ['BUC3113', 'Systems Analysis and Design',          3, 'mosh.gyagenda@mubs.ac.ug'],
+            ['BUC3124', 'Information Systems Security',         3, 'mosh.gyagenda@mubs.ac.ug'],
+            ['BUC3105', 'Mobile Application Development',       4, 'mosh.gyagenda@mubs.ac.ug'],
+            ['BUC3116', 'Research Methods',                     3, 'mosh.gyagenda@mubs.ac.ug'],
         ];
 
         foreach ($courses as [$code, $title, $credits, $lecturerEmail]) {
