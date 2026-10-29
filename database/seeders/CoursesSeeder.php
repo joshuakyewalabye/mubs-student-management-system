@@ -10,28 +10,46 @@ class CoursesSeeder extends Seeder
 {
     public function run(): void
     {
-        $courses = [
-            // code, title, credits, lecturer email
-            ['BUC3131', 'Advanced Web Application Development', 4, 'bashir.mutebi@mubs.ac.ug'],
-            ['BUC3122', 'Database Administration',              5, 'bashir.mutebi@mubs.ac.ug'],
-            ['BUC3113', 'Systems Analysis and Design',          3, 'mosh.gyagenda@mubs.ac.ug'],
-            ['BUC3124', 'Information Systems Security',         3, 'mosh.gyagenda@mubs.ac.ug'],
-            ['BUC3105', 'Mobile Application Development',       4, 'mosh.gyagenda@mubs.ac.ug'],
-            ['BUC3116', 'Research Methods',                     3, 'mosh.gyagenda@mubs.ac.ug'],
-        ];
+       $courses = [
+    // code, title
+    ['BCOM',  'Bachelor of Commerce'],
+    ['BBA',   'Bachelor of Business Administration'],
+    ['BACC',  'Bachelor of Science in Accounting'],
+    ['BFIN',  'Bachelor of Science in Finance'],
+    ['BPSM',  'Bachelor of Procurement and Supply Chain Management'],
+    ['BHRM',  'Bachelor of Human Resource Management'],
+    ['BIB',   'Bachelor of International Business'],
+    ['BREM',  'Bachelor of Real Estate Business Management'],
+    ['BLG',   'Bachelor of Leadership and Governance'],
+    ['BAEC',  'Bachelor of Arts in Economics'],
+    ['BBC',   'Bachelor of Business Computing'],
+    ['BBS',   'Bachelor of Business Statistics'],
+    ['BESM',  'Bachelor of Entrepreneurship and Small Business Management'],
+    ['BOIM',  'Bachelor of Office and Information Management'],
+    ['BLCD',  'Bachelor of Leadership and Community Development'],
+    ['BTTM',  'Bachelor of Travel and Tourism Management'],
+    ['BCHM',  'Bachelor of Catering and Hotel Management'],
+    ['BLHM',  'Bachelor of Leisure and Hospitality Management'],
+    ['BLEHM', 'Bachelor of Leisure Events and Hotel Management'],
+];
 
-        foreach ($courses as [$code, $title, $credits, $lecturerEmail]) {
-            $lecturer = User::where('email', $lecturerEmail)->first();
+$lecturers = [
+    User::where('email', 'bashir.mutebi@mubs.ac.ug')->first(),
+    User::where('email', 'mosh.gyagenda@mubs.ac.ug')->first(),
+];
 
-            // updateOrCreate matches on the unique code, so no duplicates (Q2d)
-            Course::updateOrCreate(
-                ['code' => $code],
-                [
-                    'title'       => $title,
-                    'credits'     => $credits,
-                    'lecturer_id' => $lecturer?->id,
-                ]
-            );
-        }
+foreach ($courses as $i => [$code, $title]) {
+    // Alternate the two lecturers across the programmes
+    $lecturer = $lecturers[$i % 2];
+
+    Course::updateOrCreate(
+        ['code' => $code],
+        [
+            'title'       => $title,
+            'credits'     => 3,
+            'lecturer_id' => $lecturer?->id,
+        ]
+    );
+}
     }
 }

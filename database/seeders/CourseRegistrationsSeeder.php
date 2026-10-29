@@ -11,15 +11,15 @@ class CourseRegistrationsSeeder extends Seeder
 {
     public function run(): void
     {
-        $registrations = [
-            // student number => course codes
-            '24/U/16689/EVE' => ['BUC3131', 'BUC3122', 'BUC3113'],
-            '24/U/0611'      => ['BUC3131', 'BUC3124', 'BUC3105'],
-            '24/U/0594'      => ['BUC3131', 'BUC3116'],
-            '24/U/23155'     => ['BUC3122', 'BUC3113', 'BUC3124'],
-            '24/U/0659'      => ['BUC3131', 'BUC3105', 'BUC3116'],
-            '24/U/15620/EVE' => ['BUC3113', 'BUC3124'],
-        ];
+       $registrations = [
+    // student number => course codes
+    '24/U/16689/EVE' => ['BCOM', 'BBA', 'BFIN'],
+    '24/U/0611'      => ['BBC', 'BBS', 'BAEC'],
+    '24/U/0594'      => ['BBC', 'BOIM'],
+    '24/U/23155'     => ['BACC', 'BFIN', 'BCOM'],
+    '24/U/0659'      => ['BBC', 'BESM', 'BIB'],
+    '24/U/15620/EVE' => ['BHRM', 'BLG'],
+];
 
         foreach ($registrations as $studentNumber => $courseCodes) {
             $student = Student::where('student_number', $studentNumber)->first();
