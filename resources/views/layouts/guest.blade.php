@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Sign in') — MUBS Student Management</title>
 
-    <link rel="icon" type="image/svg+xml" href="{{ asset('assets/img/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,10 +25,8 @@
     {{-- Guest layout: no sidebar or header, used for login and register only. --}}
     <div class="min-h-screen flex flex-col items-center justify-center px-4 py-10">
 
-        <div class="flex items-center gap-2 mb-6">
-            <div class="w-10 h-10 rounded-lg bg-[#2563eb] flex items-center justify-center">
-                <i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
-            </div>
+        <div class="flex items-center gap-3 mb-6">
+          <img src="{{ asset('assets/img/logo.png') }}" alt="MUBS logo" class="h-20 w-auto">
             <span class="text-lg font-bold">MUBS Student Management</span>
         </div>
 

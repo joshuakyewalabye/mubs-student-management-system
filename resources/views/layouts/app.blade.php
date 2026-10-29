@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard') — MUBS Student Management</title>
 
-    <link rel="icon" type="image/svg+xml" href="{{ asset('assets/img/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.png') }}">
 
     {{-- Inter font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
