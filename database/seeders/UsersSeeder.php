@@ -13,8 +13,8 @@ class UsersSeeder extends Seeder
        $users = [
     // name, email, role
     ['System Administrator',   'admin@mubs.ac.ug',              'administrator'],
-    ['Dr. Grace Nakato',       'grace.nakato@mubs.ac.ug',       'lecturer'],
-    ['Mr. Peter Okello',       'peter.okello@mubs.ac.ug',       'lecturer'],
+    ['Dr. Bashir Mutebi',       'bashir.mutebi@mubs.ac.ug',       'lecturer'],
+    ['Mr. Mosh Gyagenda',       'mosh.gyagenda@mubs.ac.ug',       'lecturer'],
     ['Matovu Mathew Philip',   'mathew.matovu@mubs.ac.ug',      'student'],
     ['Kyewalabye Joshua Joram','joshua.kyewalabye@mubs.ac.ug',  'student'],
     ['Kushaba Adrona',         'adrona.kushaba@mubs.ac.ug',     'student'],
