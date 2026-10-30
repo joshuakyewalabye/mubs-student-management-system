@@ -5,14 +5,22 @@
 @section('content')
 
     {{-- Page heading --}}
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
             <h1 class="text-xl font-semibold">Courses</h1>
-            <p class="text-sm text-slate-500 mt-1">Create, update and manage the courses offered.</p>
+            <p class="text-sm text-slate-500 mt-1">
+                @can('create courses')
+                    Create, update and manage the courses offered.
+                @else
+                    Browse the courses offered.
+                @endcan
+            </p>
         </div>
-        <a href="{{ route('courses.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
-            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>Add course
-        </a>
+        @can('create courses')
+            <a href="{{ route('courses.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
+                <i data-lucide="plus" class="w-4 h-4 mr-2"></i>Add course
+            </a>
+        @endcan
     </div>
 
     {{-- Filters --}}
@@ -32,7 +40,9 @@
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Credits</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Lecturer</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Students</th>
-                        <th class="py-3 px-4 text-center text-sm font-semibold text-slate-500">Actions</th>
+                        @canany(['edit courses', 'delete courses'])
+                            <th class="py-3 px-4 text-center text-sm font-semibold text-slate-500">Actions</th>
+                        @endcanany
                     </tr>
                 </thead>
                 <tbody>
@@ -44,17 +54,23 @@
                             <td class="py-3 px-4 text-sm text-slate-500">3</td>
                             <td class="py-3 px-4 text-sm text-slate-500">Lecturer name</td>
                             <td class="py-3 px-4"><span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-[#2563eb]">0 registered</span></td>
-                            <td class="py-3 px-4 text-center">
-                                <div class="inline-flex items-center gap-3">
-                                    <a href="{{ route('courses.edit', $row) }}" class="text-[#2563eb]" title="Edit"><i data-lucide="edit" class="w-4 h-4 inline"></i></a>
+                            @canany(['edit courses', 'delete courses'])
+                                <td class="py-3 px-4 text-center">
+                                    <div class="inline-flex items-center gap-3">
+                                        @can('edit courses')
+                                            <a href="{{ route('courses.edit', $row) }}" class="text-[#2563eb]" title="Edit"><i data-lucide="edit" class="w-4 h-4 inline"></i></a>
+                                        @endcan
 
-                                    <form action="{{ route('courses.destroy', $row) }}" method="POST" onsubmit="return confirm('Delete this course?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-[#d97706]" title="Delete"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
-                                    </form>
-                                </div>
-                            </td>
+                                        @can('delete courses')
+                                            <form action="{{ route('courses.destroy', $row) }}" method="POST" onsubmit="return confirm('Delete this course?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-[#d97706]" title="Delete"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
+                                            </form>
+                                        @endcan
+                                    </div>
+                                </td>
+                            @endcanany
                         </tr>
                     @endforeach
                 </tbody>
