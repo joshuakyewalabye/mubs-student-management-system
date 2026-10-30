@@ -1,5 +1,5 @@
 @php
-    // 'can' = the user needs ANY ONE of these permissions to see the link.
+    // 'can' = the user needs ANY ONE of these permissions to see the link. No 'can' = everyone logged in sees it.
     $mainLinks = [
         ['label' => 'Dashboard',     'icon' => 'layout-dashboard', 'route' => 'dashboard',           'match' => 'dashboard'],
         ['label' => 'Students',      'icon' => 'users',            'route' => 'students.index',      'match' => 'students.*',      'can' => ['view students']],

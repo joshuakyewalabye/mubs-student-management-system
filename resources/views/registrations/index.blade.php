@@ -8,11 +8,19 @@
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
             <h1 class="text-xl font-semibold">Course registrations</h1>
-            <p class="text-sm text-slate-500 mt-1">See which students are registered for which courses.</p>
+            <p class="text-sm text-slate-500 mt-1">
+                @can('view registrations')
+                    See which students are registered for which courses.
+                @else
+                    The courses you are registered for.
+                @endcan
+            </p>
         </div>
-        <a href="{{ route('registrations.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
-            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New registration
-        </a>
+        @can('create registrations')
+            <a href="{{ route('registrations.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
+                <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New registration
+            </a>
+        @endcan
     </div>
 
     {{-- Filters --}}
@@ -31,26 +39,34 @@
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Student number</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Course</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Registered on</th>
-                        <th class="py-3 px-4 text-center text-sm font-semibold text-slate-500">Actions</th>
+                        @can('delete registrations')
+                            <th class="py-3 px-4 text-center text-sm font-semibold text-slate-500">Actions</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
                     {{-- Placeholder rows. These become a @foreach over real registrations once the models exist. --}}
-                    @foreach ([1, 2, 3] as $row)
+                   @forelse ($registrations as $registration)
                         <tr class="border-b border-slate-200 hover:bg-slate-50">
-                            <td class="py-3 px-4 text-sm">Student name</td>
-                            <td class="py-3 px-4 text-sm text-slate-500">24/U/0000</td>
-                            <td class="py-3 px-4 text-sm">BUC0000 · Course title</td>
-                            <td class="py-3 px-4 text-sm text-slate-500">—</td>
-                            <td class="py-3 px-4 text-center">
-                                <form action="{{ route('registrations.destroy', $row) }}" method="POST" class="inline" onsubmit="return confirm('Remove this registration?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-[#d97706]" title="Remove"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
-                                </form>
-                            </td>
+                            <td class="py-3 px-4 text-sm">{{ $registration->student->name }}</td>
+                            <td class="py-3 px-4 text-sm text-slate-500">{{ $registration->student->student_number }}</td>
+                            <td class="py-3 px-4 text-sm">{{ $registration->course->code }} · {{ $registration->course->title }}</td>
+                            <td class="py-3 px-4 text-sm text-slate-500">{{ $registration->created_at?->format('d M Y') ?? '—' }}</td>
+                            @can('delete registrations')
+                                <td class="py-3 px-4 text-center">
+                                    <form action="{{ route('registrations.destroy', $registration) }}" method="POST" class="inline" onsubmit="return confirm('Remove this registration?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-[#d97706]" title="Remove"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
+                                    </form>
+                                </td>
+                            @endcan
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="py-6 px-4 text-center text-sm text-slate-500">No registrations found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
