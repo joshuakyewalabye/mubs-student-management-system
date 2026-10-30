@@ -36,8 +36,14 @@
 
                 <div>
                     <label for="password" class="block text-sm font-medium text-slate-600 mb-2">Password</label>
-                    <input id="password" name="password" type="password" class="input-field @error('password') border-red-400 @enderror"
-                           placeholder="Your password">
+                    <div class="relative">
+                        <input id="password" name="password" type="password" class="input-field pr-12 @error('password') border-red-400 @enderror"
+                               placeholder="Your password">
+                        <button type="button" data-password-toggle aria-controls="password" aria-label="Show password"
+                                class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 hover:text-slate-700">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                    </div>
                     @error('password')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror
