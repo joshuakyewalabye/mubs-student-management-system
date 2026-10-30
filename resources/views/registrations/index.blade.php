@@ -10,9 +10,11 @@
             <h1 class="text-xl font-semibold">Course registrations</h1>
             <p class="text-sm text-slate-500 mt-1">See which students are registered for which courses.</p>
         </div>
-        <a href="{{ route('registrations.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
-            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New registration
-        </a>
+        @can('create registrations')
+            <a href="{{ route('registrations.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
+                <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New registration
+            </a>
+        @endcan
     </div>
 
     {{-- Filters --}}
