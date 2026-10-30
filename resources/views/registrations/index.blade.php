@@ -33,7 +33,9 @@
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Student number</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Course</th>
                         <th class="py-3 px-4 text-left text-sm font-semibold text-slate-500">Registered on</th>
-                        <th class="py-3 px-4 text-center text-sm font-semibold text-slate-500">Actions</th>
+                        @can('delete registrations')
+                            <th class="py-3 px-4 text-center text-sm font-semibold text-slate-500">Actions</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -44,13 +46,15 @@
                             <td class="py-3 px-4 text-sm text-slate-500">24/U/0000</td>
                             <td class="py-3 px-4 text-sm">BUC0000 · Course title</td>
                             <td class="py-3 px-4 text-sm text-slate-500">—</td>
-                            <td class="py-3 px-4 text-center">
-                                <form action="{{ route('registrations.destroy', $row) }}" method="POST" class="inline" onsubmit="return confirm('Remove this registration?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-[#d97706]" title="Remove"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
-                                </form>
-                            </td>
+                                                    @can('delete registrations')
+                                <td class="py-3 px-4 text-center">
+                                    <form action="{{ route('registrations.destroy', $row) }}" method="POST" class="inline" onsubmit="return confirm('Remove this registration?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-[#d97706]" title="Remove"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
+                                    </form>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>
