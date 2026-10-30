@@ -38,6 +38,9 @@
 
     <div class="pt-16 sm:pl-64 min-h-screen flex flex-col">
         <main class="flex-1 pb-8 px-4 sm:px-8 lg:px-10 pt-6">
+
+            @include('partials.alerts')
+        
             @yield('content')
         </main>
 
