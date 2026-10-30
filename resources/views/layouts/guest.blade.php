@@ -37,6 +37,20 @@
         <p class="text-xs text-slate-500 mt-6">&copy; {{ date('Y') }} Makerere University Business School</p>
     </div>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('[data-password-toggle]').forEach((toggle) => {
+            toggle.addEventListener('click', () => {
+                const input = document.getElementById(toggle.getAttribute('aria-controls'));
+                const visible = input.type === 'password';
+
+                input.type = visible ? 'text' : 'password';
+                toggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+                toggle.innerHTML = `<i data-lucide="${visible ? 'eye-off' : 'eye'}" class="w-5 h-5"></i>`;
+                lucide.createIcons();
+            });
+        });
+    </script>
 </body>
 </html>

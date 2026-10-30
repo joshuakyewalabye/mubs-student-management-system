@@ -5,14 +5,16 @@
 @section('content')
 
     {{-- Page heading --}}
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
             <h1 class="text-xl font-semibold">Courses</h1>
             <p class="text-sm text-slate-500 mt-1">
                 @can('create courses')
                     Create, update and manage the courses offered.
-                @else
+                @elsecan('view courses')
                     Browse the courses offered.
+                @else
+                    The courses assigned to you.
                 @endcan
             </p>
         </div>
@@ -46,23 +48,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- Placeholder rows. These become a @foreach ($courses as $course) loop once the model exists. --}}
-                    @foreach ([1, 2, 3] as $row)
+                    @forelse ($courses as $course)
                         <tr class="border-b border-slate-200 hover:bg-slate-50">
-                            <td class="py-3 px-4 text-sm">BUC0000</td>
-                            <td class="py-3 px-4 text-sm">Course title</td>
-                            <td class="py-3 px-4 text-sm text-slate-500">3</td>
-                            <td class="py-3 px-4 text-sm text-slate-500">Lecturer name</td>
-                            <td class="py-3 px-4"><span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-[#2563eb]">0 registered</span></td>
+                            <td class="py-3 px-4 text-sm font-medium">
+                                <a href="{{ route('courses.show', $course) }}" class="text-[#2563eb] hover:underline">{{ $course->code }}</a>
+                            </td>
+                            <td class="py-3 px-4 text-sm">{{ $course->title }}</td>
+                            <td class="py-3 px-4 text-sm text-slate-500">{{ $course->credits }}</td>
+                            <td class="py-3 px-4 text-sm text-slate-500">{{ $course->lecturer?->name ?? '—' }}</td>
+                            <td class="py-3 px-4"><span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-[#2563eb]">{{ $course->students_count }} registered</span></td>
                             @canany(['edit courses', 'delete courses'])
                                 <td class="py-3 px-4 text-center">
                                     <div class="inline-flex items-center gap-3">
                                         @can('edit courses')
-                                            <a href="{{ route('courses.edit', $row) }}" class="text-[#2563eb]" title="Edit"><i data-lucide="edit" class="w-4 h-4 inline"></i></a>
+                                            <a href="{{ route('courses.edit', $course) }}" class="text-[#2563eb]" title="Edit"><i data-lucide="edit" class="w-4 h-4 inline"></i></a>
                                         @endcan
 
                                         @can('delete courses')
-                                            <form action="{{ route('courses.destroy', $row) }}" method="POST" onsubmit="return confirm('Delete this course?');">
+                                            <form action="{{ route('courses.destroy', $course) }}" method="POST" onsubmit="return confirm('Delete this course?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-[#d97706]" title="Delete"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
@@ -72,7 +75,11 @@
                                 </td>
                             @endcanany
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="py-6 px-4 text-center text-sm text-slate-500">No courses found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

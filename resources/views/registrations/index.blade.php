@@ -45,8 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- Placeholder rows. These become a @foreach over real registrations once the models exist. --}}
-                   @forelse ($registrations as $registration)
+                    @forelse ($registrations as $registration)
                         <tr class="border-b border-slate-200 hover:bg-slate-50">
                             <td class="py-3 px-4 text-sm">{{ $registration->student->name }}</td>
                             <td class="py-3 px-4 text-sm text-slate-500">{{ $registration->student->student_number }}</td>
