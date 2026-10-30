@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,8 +58,13 @@ class AuthController extends Controller
             'email'    => $data['email'],
             'password' => Hash::make($data['password']), // never store plain text
         ]);
+        // Every public sign-up is a student
+        $user->assignRole('student');
 
-        // Later: $user->assignRole('student'); once the roles package is installed.
+        // If an admin already created a student record with this email, link it to the new account
+        Student::where('email', $user->email)
+            ->whereNull('user_id')
+            ->update(['user_id' => $user->id]);
 
         Auth::login($user);
         $request->session()->regenerate();
