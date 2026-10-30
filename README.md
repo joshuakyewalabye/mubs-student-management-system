@@ -1,58 +1,170 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+﻿# MUBS Student Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based student administration system for MUBS (Makerere University Business School), built to manage students, courses, and student course registrations with role-based access control.
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project includes:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Student management
+- Course creation and editing
+- Student course registration flow
+- Dashboard overview for authenticated users
+- Role-based permissions for administrators, lecturers, and students
+- SQLite-ready setup for local development
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech stack
 
-## Learning Laravel
+- PHP 8.4.1+
+- Laravel 13
+- Composer
+- Node.js + npm
+- Vite for frontend assets
+- Spatie Laravel Permission
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project structure
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- `app/` – application logic, controllers, models, providers
+- `database/migrations/` – schema definitions
+- `database/seeders/` – seed data for users and roles
+- `resources/views/` – Blade templates
+- `routes/web.php` – application routes
+- `public/` – publicly served assets
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Prerequisites
 
-## Agentic Development
+Before starting, make sure your machine has:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- PHP 8.4.1 or newer
+- Composer
+- Node.js 18+ and npm
+- A local terminal with access to the project folder
+
+Check your versions:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php -v
+composer -V
+node -v
+npm -v
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Installation
 
-## Contributing
+1. Clone the repository:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/joshuakyewalabye/mubs-student-management-system.git
+cd mubs-student-management-system
+```
 
-## Code of Conduct
+2. Install PHP dependencies:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+3. Create your environment file:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+cp .env.example .env
+```
+
+The project is configured for SQLite by default in `.env.example`, so no database server setup is required for local development.
+
+4. Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+5. Run the database migrations and seed sample users:
+
+```bash
+php artisan migrate --seed
+```
+
+6. Install frontend dependencies:
+
+```bash
+npm install
+```
+
+7. Build the frontend assets:
+
+```bash
+npm run build
+```
+
+## Run the app
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Then open the app in your browser at:
+
+```text
+http://localhost:8000
+```
+
+If you want the frontend to rebuild automatically while developing, run:
+
+```bash
+npm run dev
+```
+
+## Default login credentials
+
+The database seeders create sample users with a common password:
+
+```text
+Password: password
+```
+
+Example seeded accounts include:
+
+- admin@mubs.ac.ug
+- bashir.mutebi@mubs.ac.ug
+- mosh.gyagenda@mubs.ac.ug
+- mathew.matovu@mubs.ac.ug
+- joshua.kyewalabye@mubs.ac.ug
+
+Use the admin account for full access during testing:
+
+```text
+Email: admin@mubs.ac.ug
+Password: password
+```
+
+## Useful commands
+
+Reset the database:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Clear configuration cache:
+
+```bash
+php artisan config:clear
+```
+
+Run the test suite:
+
+```bash
+php artisan test
+```
+
+## Notes
+
+- The app uses `database/database.sqlite` for the default SQLite setup.
+- If you want to use MySQL instead, update the `DB_` values in `.env`.
+- Role permissions are handled through Spatie Laravel Permission.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source and uses the MIT license.
