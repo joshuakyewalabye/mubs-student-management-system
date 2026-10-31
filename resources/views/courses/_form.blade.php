@@ -5,7 +5,7 @@
       $action    - the URL the form submits to
       $method    - 'POST' for create, 'PUT' for edit
       $submit    - the text on the save button
-      $lecturers - users who hold the lecturer role
+      $lecturers - the users with the lecturer role (from CourseController)
       $course    - (edit only) the course being edited
 --}}
 <form action="{{ $action }}" method="POST" class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm max-w-2xl">
@@ -28,15 +28,15 @@
 
         {{-- Title --}}
         <div>
-            <label for="title" class="block text-sm font-medium text-slate-600 mb-2">Title</label>
+            <label for="title" class="block text-sm font-medium text-slate-600 mb-2">Course title</label>
             <input id="title" name="title" type="text" class="input-field @error('title') border-red-400 @enderror"
-                   placeholder="Course title" value="{{ old('title', $course->title ?? '') }}">
+                   placeholder="e.g. Advanced Web Application Development" value="{{ old('title', $course->title ?? '') }}">
             @error('title')
                 <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
             @enderror
         </div>
 
-        {{-- Credit units --}}
+        {{-- Credits --}}
         <div>
             <label for="credits" class="block text-sm font-medium text-slate-600 mb-2">Credit units</label>
             <input id="credits" name="credits" type="number" min="1" max="10" class="input-field @error('credits') border-red-400 @enderror"
@@ -46,15 +46,13 @@
             @enderror
         </div>
 
-        {{-- Lecturer --}}
+        {{-- Lecturer: one option per user who has the lecturer role --}}
         <div>
-            <label for="lecturer_id" class="block text-sm font-medium text-slate-600 mb-2">Lecturer (optional)</label>
+            <label for="lecturer_id" class="block text-sm font-medium text-slate-600 mb-2">Lecturer</label>
             <select id="lecturer_id" name="lecturer_id" class="input-field @error('lecturer_id') border-red-400 @enderror">
-                <option value="">No lecturer assigned</option>
+                <option value="">Select a lecturer</option>
                 @foreach ($lecturers as $lecturer)
-                    <option value="{{ $lecturer->id }}" @selected(old('lecturer_id', $course->lecturer_id ?? '') == $lecturer->id)>
-                        {{ $lecturer->name }}
-                    </option>
+                    <option value="{{ $lecturer->id }}" @selected(old('lecturer_id', $course->lecturer_id ?? '') == $lecturer->id)>{{ $lecturer->name }}</option>
                 @endforeach
             </select>
             @error('lecturer_id')
