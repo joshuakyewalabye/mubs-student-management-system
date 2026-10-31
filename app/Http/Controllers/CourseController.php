@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
@@ -22,7 +25,7 @@ class CourseController extends Controller
         if ($search = $request->query('q')) {
             $query->where(function ($q) use ($search) {
                 $q->where('code', 'like', "%{$search}%")
-                    ->orWhere('title', 'like', "%{$search}%");
+                  ->orWhere('title', 'like', "%{$search}%");
             });
         }
 
@@ -46,21 +49,69 @@ class CourseController extends Controller
 
         $course->load('lecturer');
         if ($showStudents) {
-            $course->load(['students' => fn($q) => $q->orderBy('name')]);
+            $course->load(['students' => fn ($q) => $q->orderBy('name')]);
         }
 
         return view('courses.show', compact('course', 'showStudents'));
     }
 
-    // Placeholders: built in the course CRUD branch
+    // Show the empty form, with the lecturers for the dropdown
     public function create()
-    {return view('courses.create');}
+    {
+        $lecturers = User::role('lecturer')->orderBy('name')->get();
+
+        return view('courses.create', compact('lecturers'));
+    }
+
+    // Validate and save a new course
     public function store(Request $request)
-    {return redirect()->route('courses.index');}
-    public function edit(string $id)
-    {return view('courses.edit');}
-    public function update(Request $request, string $id)
-    {return redirect()->route('courses.index');}
-    public function destroy(string $id)
-    {return redirect()->route('courses.index');}
+    {
+        $data = $request->validate([
+            'code'        => ['required', 'string', 'max:20', 'unique:courses,code'],
+            'title'       => ['required', 'string', 'max:255'],
+            'credits'     => ['required', 'integer', 'between:1,10'],
+            'lecturer_id' => ['nullable', 'exists:users,id'],
+        ]);
+
+        Course::create($data);
+
+        return redirect()->route('courses.index')
+            ->with('success', 'Course added successfully.');
+    }
+
+    // Show the form filled with the course's current values
+    public function edit(Course $course)
+    {
+        $lecturers = User::role('lecturer')->orderBy('name')->get();
+
+        return view('courses.edit', compact('course', 'lecturers'));
+    }
+
+    // Same rules as store, but a course may keep its own code
+    public function update(Request $request, Course $course)
+    {
+        $data = $request->validate([
+            'code'        => ['required', 'string', 'max:20',
+                Rule::unique('courses', 'code')->ignore($course->id)],
+            'title'       => ['required', 'string', 'max:255'],
+            'credits'     => ['required', 'integer', 'between:1,10'],
+            'lecturer_id' => ['nullable', 'exists:users,id'],
+        ]);
+
+        $course->update($data);
+
+        return redirect()->route('courses.index')
+            ->with('success', 'Course updated successfully.');
+    }
+
+    // Delete the course; its registrations go too (cascadeOnDelete in the migration)
+    public function destroy(Course $course)
+    {
+        $code = $course->code;
+
+        $course->delete();
+
+        return redirect()->route('courses.index')
+            ->with('success', "Course {$code} deleted.");
+    }
 }
