@@ -330,12 +330,17 @@ $course->students;   // the students registered for a course
 
 All screenshots were taken on a freshly seeded database (`php artisan migrate:fresh --seed`).
 
+### Welcome screen
 ![Welcome Screen ](docs/screenshots/welcome-page.png)
 *This is the landing page.*
 
-### Sign in
+### Sign in page
 ![Login page](docs/screenshots/login.png)
+*Login Screen.*
+
+### Sign Up page 
 ![Sign-Up page incase of a new student user ](docs/screenshots/sign-up.png)
+*Sign Up page .*
 
 ### Administrator
 ![Administrator dashboard](docs/screenshots/admin-dashboard.png)
