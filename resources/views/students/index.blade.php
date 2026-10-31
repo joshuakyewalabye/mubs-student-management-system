@@ -8,13 +8,7 @@
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
             <h1 class="text-xl font-semibold">Students</h1>
-            <p class="text-sm text-slate-500 mt-1">
-                @can('create students')
-                    Register, update and manage student records.
-                @else
-                    Browse the student records.
-                @endcan
-            </p>
+            <p class="text-sm text-slate-500 mt-1">Register, update and manage student records.</p>
         </div>
         @can('create students')
             <a href="{{ route('students.create') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] rounded-lg text-sm font-medium text-white hover:bg-[#1d4ed8]">
@@ -48,7 +42,9 @@
                     @forelse ($students as $student)
                         <tr class="border-b border-slate-200 hover:bg-slate-50">
                             <td class="py-3 px-4 text-sm">{{ $student->student_number }}</td>
-                            <td class="py-3 px-4 text-sm">{{ $student->name }}</td>
+                            <td class="py-3 px-4 text-sm font-medium">
+                                <a href="{{ route('students.show', $student) }}" class="text-[#2563eb] hover:underline">{{ $student->name }}</a>
+                            </td>
                             <td class="py-3 px-4 text-sm text-slate-500">{{ $student->email }}</td>
                             <td class="py-3 px-4"><span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-[#2563eb]">{{ $student->courses_count }} registered</span></td>
                             @canany(['edit students', 'delete students'])
@@ -61,7 +57,7 @@
                                         {{-- Delete must be a form: browsers can only send GET and POST,
                                              so @method('DELETE') tells Laravel it is really a DELETE. --}}
                                         @can('delete students')
-                                            <form action="{{ route('students.destroy', $student) }}" method="POST" onsubmit="return confirm('Delete this student and their registrations?');">
+                                            <form action="{{ route('students.destroy', $student) }}" method="POST" onsubmit="return confirm('Delete this student? Their course registrations will be removed too.');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-[#d97706]" title="Delete"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
