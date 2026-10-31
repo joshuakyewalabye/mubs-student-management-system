@@ -335,7 +335,8 @@ All screenshots were taken on a freshly seeded database (`php artisan migrate:fr
 
 ### Sign in
 ![Login page](docs/screenshots/login.png)
-![alt text](image.png)
+![Sign-Up page incase of a new student user ](docs/screenshots/sign-up.png)
+
 ### Administrator
 ![Administrator dashboard](docs/screenshots/admin-dashboard.png)
 *Administrator dashboard.*
