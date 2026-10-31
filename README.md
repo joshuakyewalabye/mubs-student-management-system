@@ -331,7 +331,7 @@ $course->students;   // the students registered for a course
 All screenshots were taken on a freshly seeded database (`php artisan migrate:fresh --seed`).
 
 ![Welcome Screen ](docs/screenshots/welcome-page.png)
-*This is the amin landing page.*
+*This is the landing page.*
 
 ### Sign in
 ![Login page](docs/screenshots/login.png)
