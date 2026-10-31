@@ -331,8 +331,8 @@ $course->students;   // the students registered for a course
 All screenshots were taken on a freshly seeded database (`php artisan migrate:fresh --seed`).
 
 ### Sign in
-![Login page](docs/screenshots/01-login.png)
-
+![Login page](docs/screenshots/image.png)
+![alt text](image.png)
 ### Administrator
 ![Administrator dashboard](docs/screenshots/02-admin-dashboard.png)
 *Administrator dashboard.*
