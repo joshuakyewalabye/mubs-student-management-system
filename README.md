@@ -330,50 +330,53 @@ $course->students;   // the students registered for a course
 
 All screenshots were taken on a freshly seeded database (`php artisan migrate:fresh --seed`).
 
+![Welcome Screen ](docs/screenshots/welcome-page.png)
+*This is the amin landing page.*
+
 ### Sign in
-![Login page](docs/screenshots/image.png)
+![Login page](docs/screenshots/login.png)
 ![alt text](image.png)
 ### Administrator
-![Administrator dashboard](docs/screenshots/02-admin-dashboard.png)
+![Administrator dashboard](docs/screenshots/admin-dashboard.png)
 *Administrator dashboard.*
 
-![Students list](docs/screenshots/03-students-list.png)
+![Students list](docs/screenshots/students-list-admin.png)
 *Students list with search, Add student, and Edit and Delete actions.*
 
-![Student validation errors](docs/screenshots/04-student-validation-errors.png)
+![Student validation errors](docs/screenshots/duplicate-student-not-allowed-registered.png)
 *Adding a student with a student number and email that already exist.*
 
-![Student added message](docs/screenshots/05-student-added-banner.png)
+![Student added message](docs/screenshots/student-added-banner.png)
 *Success message after adding a student.*
 
-![Student detail](docs/screenshots/06-student-detail.png)
+![Student detail](docs/screenshots/students-list-admin.png)
 *Student detail page listing the registered courses.*
 
-![Courses list](docs/screenshots/07-courses-list.png)
+![Courses list](docs/screenshots/courses-list.png)
 *All 19 courses with lecturer and registered-student count.*
 
-![Course form](docs/screenshots/08-course-form.png)
+![Course form](docs/screenshots/add-course.png)
 *Add course form with the lecturer dropdown.*
 
-![Course detail](docs/screenshots/09-course-detail.png)
+![Course detail](docs/screenshots/course-detail-registered-students.png)
 *Course detail with the registered students.*
 
-![Registrations list](docs/screenshots/10-registrations-list.png)
+![Registrations list](docs/screenshots/course-detail-registered-students.png)
 *All 16 registrations.*
 
-![Duplicate registration error](docs/screenshots/11-duplicate-registration-error.png)
+![Duplicate registration error](docs/screenshots/duplicate-student-not-allowed-registered.png)
 *Registering a student who is already registered for the course.*
 
 ### Student
-![Student registrations](docs/screenshots/12-student-registrations.png)
+![Student registrations](docs/screenshots/student-sees-only-thier-registered-courses.png)
 *A student sees only their own registrations and a limited sidebar.*
 
 ### Lecturer
-![Lecturer courses](docs/screenshots/13-lecturer-courses.png)
+![Lecturer courses](docs/screenshots/lecturer-sees-only-own-courses.png)
 *A lecturer sees only their own courses.*
 
 ### Access control
-![403 Forbidden](docs/screenshots/14-forbidden-403.png)
+![403 Forbidden](docs/screenshots/student-access-denied.png)
 *A student opening `/students` gets 403.*
 
 ## 12. Troubleshooting
