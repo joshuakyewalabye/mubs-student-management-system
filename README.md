@@ -402,4 +402,4 @@ All screenshots were taken on a freshly seeded database (`php artisan migrate:fr
 
 - `main` holds stable code and `develop` is the integration branch.
 - Every member works on their own `feature/...` branch, commits with meaningful messages, and opens a pull request into `develop`. The integrated application is tested before `develop` is merged into `main`.
-- The members, their tasks, branches, pull requests and contributions are listed in [`docs/CONTRIBUTION_REPORT.md`](docs/CONTRIBUTION_REPORT.md).
+
