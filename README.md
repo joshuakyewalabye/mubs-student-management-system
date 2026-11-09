@@ -416,4 +416,5 @@ _A student opening `/students` gets 403._
 - `main` holds stable code and `develop` is the integration branch.
 - Every member works on their own `feature/...` branch, commits with meaningful messages, and opens a pull request into `develop`. The integrated application is tested before `develop` is merged into `main`.
 
-![Group Report =>](docs/report/BOLT-DEVS-CONTRIBUTION%20REPORT.pdf)
+[Group Report =>](docs/report/BOLT-DEVS-CONTRIBUTION%20REPORT.pdf)
+
